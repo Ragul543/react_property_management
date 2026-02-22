@@ -1,0 +1,226 @@
+.properties-page__hero {
+  position: relative;
+  height: 45vh;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1400");
+  background-size: cover;
+  background-position: center;
+}
+
+.properties-page__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(10, 10, 10, 1));
+}
+
+.properties-page__hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.properties-page__label {
+  color: #c9a96e;
+  font-size: 0.9rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.properties-page__hero-content h1 {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.properties-page__hero-content p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.05rem;
+}
+
+.properties-page__container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 40px 100px;
+}
+
+.properties-page__toolbar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.properties-page__search-bar {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 14px 20px;
+}
+
+.properties-page__search-bar svg {
+  color: #c9a96e;
+  font-size: 1.2rem;
+}
+
+.properties-page__search-bar input {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  width: 100%;
+  font-family: inherit;
+}
+
+.properties-page__search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.properties-page__filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 14px 25px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.properties-page__filter-toggle:hover {
+  border-color: #c9a96e;
+  color: #c9a96e;
+}
+
+.properties-page__filters {
+  overflow: hidden;
+}
+
+.properties-page__filters-inner {
+  display: flex;
+  gap: 15px;
+  padding: 20px 0;
+}
+
+.properties-page__filters-inner select {
+  flex: 1;
+  background: #151515;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.properties-page__filters-inner select option {
+  background: #1a1a1a;
+}
+
+.properties-page__clear {
+  background: none;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  color: #c9a96e;
+  padding: 12px 25px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.properties-page__clear:hover {
+  background: rgba(201, 169, 110, 0.1);
+}
+
+.properties-page__count {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+}
+
+.properties-page__count span {
+  color: #c9a96e;
+  font-weight: 600;
+}
+
+.properties-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.properties-page__loading {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.properties-page__spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #c9a96e;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  animation: spin-prop 0.8s linear infinite;
+}
+
+@keyframes spin-prop {
+  to { transform: rotate(360deg); }
+}
+
+.properties-page__loading p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+}
+
+.properties-page__empty {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.properties-page__empty h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.properties-page__empty p {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 1024px) {
+  .properties-page__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .properties-page__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .properties-page__filters-inner {
+    flex-direction: column;
+  }
+
+  .properties-page__hero-content h1 {
+    font-size: 2rem;
+  }
+}
