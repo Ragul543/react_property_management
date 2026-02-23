@@ -36,7 +36,13 @@ const PropertyDetail = () => {
 
   const formatPrice = (price) => {
     if (!price) return "Contact Us";
-    return `$${price.toLocaleString()}`;
+    if (price >= 10000000) {
+      return `₹${(price / 10000000).toFixed(1)} Cr`;
+    }
+    if (price >= 100000) {
+      return `₹${(price / 100000).toFixed(1)} L`;
+    }
+    return `₹${price.toLocaleString('en-IN')}`;
   };
 
   const handleSubmit = async (e) => {
@@ -78,8 +84,19 @@ const PropertyDetail = () => {
   }
 
   const images = property.images && property.images.length > 0
-    ? property.images
-    : [PLACEHOLDER_IMAGE];
+    ? property.images.map((img) =>
+        typeof img === 'string' ? { url: img, name: '', overview_image: '' } : img
+      )
+    : [{ url: PLACEHOLDER_IMAGE, name: '', overview_image: '' }];
+
+  const overviewLabels = {
+    front: "Front",
+    back: "Back",
+    right_side: "Right Side",
+    left_side: "Left Side",
+    "360_view": "360 View",
+    others: "Others",
+  };
 
   const statusLabels = {
     for_sale: "For Sale",
@@ -132,10 +149,15 @@ const PropertyDetail = () => {
           >
             <div className="detail-page__gallery-main">
               <img
-                src={images[activeImage] || PLACEHOLDER_IMAGE}
-                alt={property.name}
+                src={images[activeImage]?.url || PLACEHOLDER_IMAGE}
+                alt={images[activeImage]?.name || property.name}
                 onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
               />
+              {images[activeImage]?.overview_image && (
+                <span className="detail-page__image-label">
+                  {overviewLabels[images[activeImage].overview_image] || images[activeImage].overview_image}
+                </span>
+              )}
               <div className="detail-page__gallery-actions">
                 <button><MdFavorite /> Save</button>
                 <button><MdShare /> Share</button>
@@ -144,14 +166,22 @@ const PropertyDetail = () => {
             {images.length > 1 && (
               <div className="detail-page__gallery-thumbs">
                 {images.map((img, index) => (
-                  <img
+                  <div
                     key={index}
-                    src={img}
-                    alt={`View ${index + 1}`}
-                    className={index === activeImage ? "active" : ""}
+                    className={`detail-page__thumb ${index === activeImage ? "active" : ""}`}
                     onClick={() => setActiveImage(index)}
-                    onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
-                  />
+                  >
+                    <img
+                      src={img.url}
+                      alt={img.name || `View ${index + 1}`}
+                      onError={(e) => { e.target.src = PLACEHOLDER_IMAGE; }}
+                    />
+                    {img.overview_image && (
+                      <span className="detail-page__thumb-label">
+                        {overviewLabels[img.overview_image] || img.overview_image}
+                      </span>
+                    )}
+                  </div>
                 ))}
               </div>
             )}

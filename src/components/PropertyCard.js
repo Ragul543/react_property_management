@@ -12,15 +12,18 @@ const PropertyCard = ({ property, index }) => {
 
   const formatPrice = (price) => {
     if (!price) return "Contact Us";
-    if (price >= 1000000) {
-      return `$${(price / 1000000).toFixed(1)}M`;
+    if (price >= 10000000) {
+      return `₹${(price / 10000000).toFixed(1)} Cr`;
     }
-    return `$${price.toLocaleString()}`;
+    if (price >= 100000) {
+      return `₹${(price / 100000).toFixed(1)} L`;
+    }
+    return `₹${price.toLocaleString('en-IN')}`;
   };
 
-  // Determine image - from Odoo API or fallback
+  // Determine image - from Odoo API or placeholder
   const imageUrl = (!imgError && property.images && property.images.length > 0)
-    ? property.images[0]
+    ? (property.images[0]?.url || property.images[0])
     : (!imgError && property.image)
       ? property.image
       : PLACEHOLDER_IMAGE;
@@ -43,7 +46,7 @@ const PropertyCard = ({ property, index }) => {
   const displayType = typeLabels[property.property_type] || property.property_type || property.type || "";
   const displayStatus = statusLabels[property.sale_rent] || property.status || "For Sale";
   const displayPrice = property.sale_rent === "for_tenancy"
-    ? `$${(property.rent_month || 0).toLocaleString()}/mo`
+    ? `₹${(property.rent_month || 0).toLocaleString('en-IN')}/mo`
     : formatPrice(property.price);
 
   return (

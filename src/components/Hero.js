@@ -108,10 +108,10 @@ const Hero = () => {
               }
             >
               <option value="">Price Range</option>
-              <option value="0-2000000">Under $2M</option>
-              <option value="2000000-5000000">$2M - $5M</option>
-              <option value="5000000-10000000">$5M - $10M</option>
-              <option value="10000000-999999999">$10M+</option>
+              <option value="0-2000000">Under ₹20 L</option>
+              <option value="2000000-5000000">₹20 L - ₹50 L</option>
+              <option value="5000000-10000000">₹50 L - ₹1 Cr</option>
+              <option value="10000000-999999999">₹1 Cr+</option>
             </select>
           </div>
           <button type="submit" className="hero__search-btn">

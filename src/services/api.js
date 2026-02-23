@@ -103,12 +103,18 @@ export function fixImageUrl(url) {
 
 /**
  * Process property data from API to fix image URLs
+ * Images are now objects: { id, url, name, overview_image }
  */
 export function processPropertyData(prop) {
   return {
     ...prop,
     image: prop.image ? fixImageUrl(prop.image) : '',
-    images: (prop.images || []).map(fixImageUrl),
+    images: (prop.images || []).map((img) => {
+      if (typeof img === 'string') {
+        return { url: fixImageUrl(img), name: '', overview_image: '' };
+      }
+      return { ...img, url: fixImageUrl(img.url) };
+    }),
     agent: prop.agent ? {
       ...prop.agent,
       image: prop.agent.image ? fixImageUrl(prop.agent.image) : '',
@@ -120,3 +126,4 @@ export function processPropertyData(prop) {
  * Placeholder image when no image available
  */
 export const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800';
+
